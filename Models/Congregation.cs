@@ -12,9 +12,9 @@ namespace kms_api.Models
 
         public List<Publisher> Publishers { get; set; } 
         public List<Meeting> Meetings { get; set; }
-        public TimeSpan MidweekMeetingStartsAt { get; set; }
+        public string MidweekMeetingStartsAt { get; set; }
         public int MidweekMeetingDay { get; set; }
-        public TimeSpan WeekendMeetingStartsAt { get; set; }
+        public string WeekendMeetingStartsAt { get; set; }
         public int WeekendMeetingDay { get; set; }
     }
 }

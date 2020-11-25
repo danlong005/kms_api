@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using kms_api.Models;
+using kms_api.Services;
 
 namespace kms_api
 {
@@ -28,6 +29,7 @@ namespace kms_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IPublisherService, PublisherService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
