@@ -18,15 +18,13 @@ namespace kms_api.Controllers
         [HttpGet]
         public IActionResult GetPublishers()
         {
-            return StatusCode(StatusCodes.Status200OK, 
-                _publisherService.GetPublishers());
+            return StatusCode(StatusCodes.Status200OK, _publisherService.GetPublishers());
         }
 
         [HttpPost]
         public IActionResult CreatePublisher(Publisher publisher)
         {
-            return StatusCode(StatusCodes.Status201Created, 
-                _publisherService.CreatePublisher(publisher));
+            return StatusCode(StatusCodes.Status201Created, _publisherService.CreatePublisher(publisher));
         }
     }
 }

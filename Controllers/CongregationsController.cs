@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using kms_api.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+using kms_api.Services;
 
 namespace kms_api.Controllers
 {
@@ -10,26 +8,22 @@ namespace kms_api.Controllers
     [Route("api/v1/[controller]")]
     public class CongregationsController : ControllerBase 
     {
-        private readonly KMSDBContext _context;
+        private readonly ICongregationService _service;
 
-        public CongregationsController(KMSDBContext context) {
-            _context = context;
+        public CongregationsController(ICongregationService service) {
+            _service = service;
         }
 
         [HttpGet]
         public IActionResult GetCongregations()
         {
-            return StatusCode(StatusCodes.Status200OK, 
-                _context.Congregations.Include(c => c.Publishers).ToList());
+            return StatusCode(StatusCodes.Status200OK, _service.GetCongregations());
         }
 
         [HttpGet("{id}/meetings")]
-        public IActionResult GetCongregationMeeting(int id)
+        public IActionResult GetCongregationMeetings(int id)
         {
-            return StatusCode(StatusCodes.Status200OK, 
-                _context.Congregations.Where(c => c.CongregationID == id).
-                Include(c => c.Meetings).ThenInclude(m => m.Parts).ThenInclude(p => p.Publisher).
-                Include(c => c.Meetings).ThenInclude(m => m.Parts).ThenInclude(p => p.Assistant).ToList());
+            return StatusCode(StatusCodes.Status200OK, _service.GetCongregationMeetings(id));
         }
     }
 }

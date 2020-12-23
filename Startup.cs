@@ -30,6 +30,8 @@ namespace kms_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IPublisherService, PublisherService>();
+            services.AddScoped<ICongregationService, CongregationService>();
+            services.AddScoped<IMeetingService, MeetingService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
